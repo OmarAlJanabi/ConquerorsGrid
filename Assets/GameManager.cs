@@ -31,24 +31,18 @@ public class GameManager : MonoBehaviour
 
     public void CheckBoxCompletion(GameObject wall)
     {
-        BoxWallAssociation association = boxToWalls.FirstOrDefault(a => a.walls.Contains(wall));
-
-        if (association != null)
+        foreach (var association in boxToWalls)
         {
-            // Check how many walls of the box have changed color
-            int changedWallCount = 0;
-            foreach (GameObject boxWall in association.walls)
+            if (association.walls.Contains(wall))
             {
-                if (IsWallPlayerColor(boxWall))
-                {
-                    changedWallCount++;
-                }
-            }
+                // Check if all walls for this box have changed color
+                bool allWallsColored = association.walls.All(w => IsWallPlayerColor(w));
 
-            // If all walls have changed color, update the box color
-            if (changedWallCount == association.walls.Length)
-            {
-                ChangeBoxColor(association.box, wall.GetComponent<Renderer>().material.color);
+                // If all walls for this box have changed color, update the box color
+                if (allWallsColored)
+                {
+                    ChangeBoxColor(association.box, wall.GetComponent<Renderer>().material.color);
+                }
             }
         }
     }

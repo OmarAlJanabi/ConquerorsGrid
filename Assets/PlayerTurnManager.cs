@@ -2,28 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTurnManager : MonoBehaviour
-{
-    // Enum to represent player colors
-    public enum PlayerColor
+
+    public enum Player
     {
-        Red,
-        Blue
+        Player1,
+        Player2
     }
 
-    // Current player color
-    private PlayerColor currentPlayerColor = PlayerColor.Red;
-
-    // Method to switch player turn
-    public void SwitchPlayerTurn()
+    public class PlayerManager : MonoBehaviour
     {
-        // Switch player turn
-        currentPlayerColor = (currentPlayerColor == PlayerColor.Red) ? PlayerColor.Blue : PlayerColor.Red;
+        public Player currentPlayer = Player.Player1;
+        public Material player1Material;
+        public Material player2Material;
+
+        // Additional player-related logic can go here
     }
 
-    // Method to get the current player color
-    public PlayerColor GetCurrentPlayerColor()
-    {
-        return currentPlayerColor;
-    }
-}

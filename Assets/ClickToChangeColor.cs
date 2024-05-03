@@ -2,23 +2,25 @@ using UnityEngine;
 
 public class ClickToChangeColor : MonoBehaviour
 {
-    public Material redMaterial; // Assign the red material in the Inspector
-    public GameManager gameManager; // Reference to the GameManager script
-
+    public PlayerManager playerManager;
     private Renderer rend;
+    public GameManager gameManager; // Reference to GameManager script
+
 
     void Start()
     {
-        // Get the Renderer component
         rend = GetComponent<Renderer>();
     }
 
     void OnMouseDown()
     {
-        // Change the material to red when clicked
-        rend.material = redMaterial;
+        Material playerMaterial = playerManager.currentPlayer == Player.Player1 ? playerManager.player1Material : playerManager.player2Material;
 
-        // Notify the GameManager that the wall color has changed
-        gameManager.CheckBoxCompletion(gameObject);
+        rend.material = playerMaterial;
+
+        gameManager.CheckBoxCompletion(gameObject, playerManager.currentPlayer);
+
+        // Switch to the next player
+        playerManager.currentPlayer = (playerManager.currentPlayer == Player.Player1) ? Player.Player2 : Player.Player1;
     }
 }

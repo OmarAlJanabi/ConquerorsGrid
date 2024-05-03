@@ -13,6 +13,23 @@ public class GameManager : MonoBehaviour
     public Material player2Material;
     public PlayerManager playerManager;
     public ScoreManager scoreManager; // Reference to ScoreManager script
+    private bool allowNextTurn = true; // Flag to allow the next turn
+
+
+    void Update()
+    {
+        // Check if the turn should be allowed
+        if (allowNextTurn)
+        {
+            // Check for player input to take the next turn
+            if (Input.GetMouseButtonDown(0))
+            {
+                // Switch to the next player
+                playerManager.currentPlayer = (playerManager.currentPlayer == Player.Player1) ? Player.Player2 : Player.Player1;
+                allowNextTurn = false; // Disallow the next turn until a box is scored
+            }
+        }
+    }
 
     void Start()
     {
@@ -43,10 +60,15 @@ public class GameManager : MonoBehaviour
                 if (allWallsColored)
                 {
                     ChangeBoxColor(association.box, wall.GetComponent<Renderer>().material.color);
+
+                    // Update the score and allow the next turn
+                    scoreManager.UpdateScore(wall.GetComponent<Renderer>().material.color, playerManager);
+                    allowNextTurn = true;
                 }
             }
         }
     }
+
 
     private bool IsWallPlayerColor(GameObject wall)
     {

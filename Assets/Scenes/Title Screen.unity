@@ -942,7 +942,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &650804967
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1739,10 +1739,10 @@ MonoBehaviour:
     be placed diagonally, only horizontally and vertically.\r\n \r\n> Whoever closes
     a square wins that space and conquers the territory, regardless if the other
     lines making up the square belong to the other player. \r\n\r\n> If you close
-    a square (conquer a territory), you play another turn.\r\n\r\n> Every square
-    you close is equivalent to 1 point.\r\n\r\n> Whoever has the most territory (squares)
-    at the end of the game wins.\r\n\r\n> Players must be assigned different colours.\r\n
-    \r\n\r> Each box (territory) awards 2 points \r\n"
+    a square (conquer a territory), you play another turn.\r\n\r\n> Whoever has the
+    most territory (squares) at the end of the game wins.\r\n\r\n> Players must be
+    assigned different colours.\r\n \r\n\r> Each box (territory) awards 2 points
+    \r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}

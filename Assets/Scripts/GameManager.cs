@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,7 +15,9 @@ public class GameManager : MonoBehaviour
     public PlayerManager playerManager;
     public ScoreManager scoreManager; // Reference to ScoreManager script
     private bool allowNextTurn = true; // Flag to allow the next turn
-
+    public GameObject winScreen;
+    public TextMeshProUGUI outcomeText;
+   
 
     void Update()
     {
@@ -28,6 +31,11 @@ public class GameManager : MonoBehaviour
                 playerManager.currentPlayer = (playerManager.currentPlayer == Player.Player1) ? Player.Player2 : Player.Player1;
                 allowNextTurn = false; // Disallow the next turn until a box is scored
             }
+        }
+        if (IsGameOver())
+        {
+            DetermineOutcome();
+            ActivateWinScreen();
         }
     }
 
@@ -45,6 +53,12 @@ public class GameManager : MonoBehaviour
                 wall.GetComponent<ClickToChangeColor>().gameManager = this;
             }
         }
+    }
+
+    bool IsGameOver()
+    {
+        int totalScore = scoreManager.player1Score + scoreManager.player2Score;
+        return totalScore >= 32;
     }
 
     public void CheckBoxCompletion(GameObject wall)
@@ -84,5 +98,27 @@ public class GameManager : MonoBehaviour
         // Update the color state of the box
         boxColorStates[box] = true;
         scoreManager.UpdateScore(color, playerManager);
+    }
+
+    void DetermineOutcome()
+    {
+        string outcome = "";
+        if (scoreManager.player1Score > scoreManager.player2Score)
+        {
+            outcome = "Player 1 Wins!";
+        }
+        else if (scoreManager.player2Score > scoreManager.player1Score)
+        {
+            outcome = "Player 2 Wins!";
+        }
+        else
+        {
+            outcome = "Draw!";
+        }
+        outcomeText.text = outcome;
+    }
+    void ActivateWinScreen()
+    {
+        winScreen.SetActive(true);
     }
 }

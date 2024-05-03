@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Material player1Material;
     public Material player2Material;
     public PlayerManager playerManager;
+    public ScoreManager scoreManager; // Reference to ScoreManager script
 
     void Start()
     {
@@ -60,5 +61,6 @@ public class GameManager : MonoBehaviour
 
         // Update the color state of the box
         boxColorStates[box] = true;
+        scoreManager.UpdateScore(color, playerManager);
     }
 }
